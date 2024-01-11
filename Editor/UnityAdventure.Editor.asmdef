@@ -1,0 +1,18 @@
+{
+    "name": "UnityAdventure.Editor",
+    "rootNamespace": "UnityAdventure",
+    "references": [
+        "GUID:98d204a37befe46439ca7d2db92bb711"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
