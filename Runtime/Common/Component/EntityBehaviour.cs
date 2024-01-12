@@ -1,23 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using UnityServiceRegistry;
 
 namespace UnityAdventure
 {
-    public class PlayerLookSource : MonoBehaviour, IComponentData
+    public abstract class EntityBehaviour : MonoBehaviour, IComponentData
     {
-        EntityManager entityManager; 
+        EntityManager entityManager;
         Entity myEntity;
 
-        void Start()
+        protected virtual void Start()
         {
             ServiceRegistry.GetService(out entityManager);
             myEntity = entityManager.SpawnObject(this);
         }
 
-        void OnDestroy()
+        protected virtual void OnDestroy()
         {
             entityManager.DestroyObject(myEntity);
         }
