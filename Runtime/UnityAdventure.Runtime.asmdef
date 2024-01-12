@@ -2,14 +2,14 @@
     "name": "UnityAdventure.Runtime",
     "rootNamespace": "UnityAdventure",
     "references": [
-        "GUID:e0cd26848372d4e5c891c569017e11f1",
-        "GUID:2665a8d13d1b3f18800f46e256720795",
-        "GUID:d8b63aba1907145bea998dd612889d6b",
-        "GUID:734d92eba21c94caba915361bd5ac177",
-        "GUID:b21f4b1d6baf90041aa6a65bca236026",
-        "GUID:5d12bd25872039a42ba0b67ecf0388db",
-        "GUID:dd33ba5899b9c6b448fa35d78797723c",
-        "GUID:b8ec0a4a23a2cfa40915d9093597d73c"
+        "Unity.Collections",
+        "Unity.Burst",
+        "Unity.Mathematics",
+        "Unity.Entities",
+        "UnityUtility.Runtime",
+        "UnityGameLoop.Runtime",
+        "UnityObjectInfo.Runtime",
+        "UnityGameState.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

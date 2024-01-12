@@ -2,7 +2,8 @@
     "name": "UnityAdventure.Editor",
     "rootNamespace": "UnityAdventure",
     "references": [
-        "GUID:98d204a37befe46439ca7d2db92bb711"
+        "UnityUtility.Editor",
+        "UnityAdventure.Runtime"
     ],
     "includePlatforms": [
         "Editor"

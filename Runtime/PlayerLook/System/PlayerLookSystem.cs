@@ -7,9 +7,9 @@ namespace UnityAdventure
 {
     public partial class PlayerLookSystem : GameLoopSystem<GameLoop>
     {
-        RaycastHit[] hits = new RaycastHit[10];
         PlayerLookConfig lookConfig;
-        PlayerLookEvent playerLookEvent = new PlayerLookEvent();
+        PlayerLookEvent reusableLookEvent = new PlayerLookEvent();
+        RaycastHit[] hits = new RaycastHit[10];
         float nextUpdateTime;
 
         protected override bool NeedUpdate => (ElapsedTime >= nextUpdateTime);
@@ -83,9 +83,9 @@ namespace UnityAdventure
 
         void Hit(Entity entity, PlayerLookSource lookSource, PlayerLookTarget newTarget)
         {
-            playerLookEvent.NewTarget = newTarget;
-            playerLookEvent.OldTarget = lookSource.Target;
-            EntityManager.AddComponentData(entity, playerLookEvent);
+            reusableLookEvent.NewTarget = newTarget;
+            reusableLookEvent.OldTarget = lookSource.Target;
+            EntityManager.AddComponentData(entity, reusableLookEvent);
 
             lookSource.Target = newTarget;
         }
@@ -94,9 +94,9 @@ namespace UnityAdventure
         {
             if (lookSource.Target != null)
             {
-                playerLookEvent.NewTarget = null;
-                playerLookEvent.OldTarget = lookSource.Target;
-                EntityManager.AddComponentData(entity, playerLookEvent);
+                reusableLookEvent.NewTarget = null;
+                reusableLookEvent.OldTarget = lookSource.Target;
+                EntityManager.AddComponentData(entity, reusableLookEvent);
 
                 lookSource.Target = null;
             }
