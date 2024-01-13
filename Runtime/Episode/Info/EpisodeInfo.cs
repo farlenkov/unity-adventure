@@ -1,13 +1,6 @@
 using System;
 using UnityEngine;
 using UnityObjectInfo;
-using System.IO;
-
-
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.SceneManagement;
-#endif
 
 namespace UnityAdventure
 {

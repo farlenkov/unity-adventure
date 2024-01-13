@@ -2,7 +2,10 @@
     "name": "UnityAdventure.Editor",
     "rootNamespace": "UnityAdventure",
     "references": [
+        "Unity.EditorCoroutines.Editor",
         "UnityUtility.Editor",
+        "UnityUtility.Runtime",
+        "UnityGraph.Editor",
         "UnityAdventure.Runtime"
     ],
     "includePlatforms": [

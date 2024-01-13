@@ -24,12 +24,21 @@ namespace UnityAdventure
             }
 
             EditorGUI.BeginChangeCheck();
-            var newId = ObjectField(label.text, prop.ID, position);
+            var selectedObject = ObjectField(label.text, prop.ID, position);
 
             if (EditorGUI.EndChangeCheck())
             {
-                prop.ID = newId;
-
+                if (selectedObject == null)
+                {
+                    prop.ID = null;
+                    prop.SceneName = null;
+                }
+                else
+                {
+                    prop.ID = selectedObject.ID;
+                    prop.SceneName = selectedObject.gameObject.GetRootName();
+                }
+                
                 var targetObject = property.serializedObject.targetObject;
                 EditorUtility.SetDirty(targetObject);
                 
@@ -44,7 +53,7 @@ namespace UnityAdventure
             }
         }
 
-        public static string ObjectField(
+        public static SceneObject ObjectField(
             string label,
             string id,
             Rect position)
@@ -66,8 +75,7 @@ namespace UnityAdventure
                 }
             }
 
-            selectedObject = (SceneObject)EditorGUI.ObjectField(position, label, selectedObject, typeof(SceneObject), true);
-            return selectedObject?.ID;
+            return (SceneObject)EditorGUI.ObjectField(position, label, selectedObject, typeof(SceneObject), true);
         }
     }
 }

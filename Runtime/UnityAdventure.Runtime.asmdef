@@ -6,6 +6,7 @@
         "Unity.Burst",
         "Unity.Mathematics",
         "Unity.Entities",
+        "UniTask",
         "UnityUtility.Runtime",
         "UnityGameLoop.Runtime",
         "UnityObjectInfo.Runtime",
