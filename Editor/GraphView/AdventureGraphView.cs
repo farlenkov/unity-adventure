@@ -1,13 +1,35 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityUtility;
 
 namespace UnityAdventure
 {
     public class AdventureGraphView : UnityGraphEditor.GraphView
     {
+        Dictionary<Type, Type> ObjectToNodeType = new()
+        {
+            { typeof(DoorToggleAction), typeof(DoorToggleNodeView) },
+            { typeof(LockToggleAction), typeof(LockToggleNodeView) },
+            { typeof(ObjectToggleAction), typeof(ObjectToggleNodeView) }
+        };
+
         protected override void OnEdgeCreate(Edge edge)
         {
+            var fromNodeView = edge.output.node as AdventureNodeView;
+            var toNodeView = edge.input.node as AdventureNodeView;
+            var flowNode = toNodeView.GetType().GetField(nameof(FlowNodeView<FlowNode>.Target)).GetValue(toNodeView) as FlowNode;
 
+            flowNode.TryAddTriggerSource(
+                fromNodeView.viewDataKey, 
+                fromNodeView.Data.gameObject.name,
+                edge.output.userData.ToString(),
+                fromNodeView.Data.gameObject.GetRootName());
+
+            EditorUtility.SetDirty(flowNode);
         }
 
         protected override void OnEdgeRemove(Edge edge)
@@ -20,31 +42,68 @@ namespace UnityAdventure
 
         }
 
+        protected override void AddStyle()
+        {
+            base.AddStyle();
+
+            var style = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.farlenkov.unity-adventure/Editor/GraphView/GraphStyles.uss");
+            styleSheets.Add(style);
+        }
+
         internal void Refresh()
         {
             ClearNodes();
-            CreateNodes();
+            CreateSceneNodes();
+            CreateFlowNodes();
+            CreateEdges();
         }
 
-        void CreateNodes()
+        void CreateSceneNodes()
         {
             var sceneObjects = GameObject.FindObjectsOfType<SceneObject>();
 
             foreach (var sceneObject in sceneObjects)
-                CreateView(sceneObject);
+            {
+                var data = sceneObject.GetComponent<NodeViewData>() ?? sceneObject.gameObject.AddComponent<NodeViewData>();
+                var view = new SceneObjectNodeView();
+
+                view.Graph = this;
+                view.Data = data;
+                view.Target = sceneObject;
+
+                view.Init();
+                AddElement(view);
+            }
         }
 
-        void CreateView(SceneObject sceneObject)
+        void CreateFlowNodes()
         {
-            var data = sceneObject.GetComponent<NodeViewData>() ?? sceneObject.gameObject.AddComponent<NodeViewData>();
-            var view = new SceneObjectNodeView();
+            var flowObjects = GameObject.FindObjectsOfType<FlowNode>();
 
-            view.Graph = this;
-            view.Data = data;
-            view.Target = sceneObject;
+            foreach (var flowObject in flowObjects)
+            {
+                if (!ObjectToNodeType.TryGetValue(flowObject.GetType(), out var nodeType))
+                {
+                    Log.Error($"NodeView type not defined for {flowObject.GetType()}");
+                    continue;
+                }
 
-            view.Init();
-            AddElement(view);
+                var data = flowObject.GetComponent<NodeViewData>() ?? flowObject.gameObject.AddComponent<NodeViewData>();
+                var view = Activator.CreateInstance(nodeType) as AdventureNodeView;
+                view.Graph = this;
+                view.Data = data;
+
+                nodeType.GetField(nameof(FlowNodeView<FlowNode>.Target)).SetValue(view, flowObject);
+                view.Init();
+                AddElement(view);
+            }
+        }
+
+        void CreateEdges()
+        {
+            foreach (var node in nodes)
+                if (node is AdventureNodeView view)
+                    view.CreateEdges();
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace UnityAdventure
 {
-    public class ObjectToggleAction : FlowBehaviour
+    public class ObjectToggleAction : FlowNode
     {
         public SceneObjectRef[] Activate;
         public SceneObjectRef[] Deactivate;

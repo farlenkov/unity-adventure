@@ -1,0 +1,19 @@
+.UnityGraphView #collapse-button 
+{ 
+	display: none 
+}
+
+.UnityGraphView #extension 
+{ 
+	padding: 5px 10px 
+}
+
+.SceneObjectNodeView #node-border 
+{ 
+	border-color: #5485A6;
+}
+
+.FlowNodeView #node-border 
+{ 
+	border-color: #ffb400; 
+}

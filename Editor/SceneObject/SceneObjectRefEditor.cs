@@ -58,24 +58,14 @@ namespace UnityAdventure
             string id,
             Rect position)
         {
-            var objectList = GameObject.FindObjectsByType<SceneObject>(
-                FindObjectsInactive.Include, 
-                FindObjectsSortMode.None);
+            SceneObject.TryGetByID(id, out var selectedObject);
 
-            var selectedObject = (SceneObject)null;
-
-            for (var i = 0; i < objectList.Length; i++)
-            {
-                var obj = objectList[i];
-
-                if (obj.ID == id)
-                {
-                    selectedObject = obj;
-                    break;
-                }
-            }
-
-            return (SceneObject)EditorGUI.ObjectField(position, label, selectedObject, typeof(SceneObject), true);
+            return (SceneObject)EditorGUI.ObjectField(
+                position, 
+                label, 
+                selectedObject, 
+                typeof(SceneObject), 
+                true);
         }
     }
 }
