@@ -16,7 +16,10 @@ namespace UnityAdventure
 
         void DrawTriggerSources()
         {
-            if (Target?.TriggerSources?.Count == 0)
+            if (Target.TriggerSources == null)
+                return;
+
+            if (Target.TriggerSources.Count == 0)
                 return;
 
             GUILayout.Label($"Trigger Sources ({Target.TriggerSources.Count})");

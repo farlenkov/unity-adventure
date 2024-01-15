@@ -9,6 +9,7 @@ namespace UnityAdventure
     {        
         protected EntityManager EntityManager => SceneObject.EntityManager;
         protected Entity Entity => SceneObject.Entity;
+        protected EventManager EventManager => SceneObject.EventManager;
         protected SceneObject SceneObject { get; private set; }
 
         protected virtual void Start()
@@ -16,9 +17,9 @@ namespace UnityAdventure
             SceneObject = GetComponent<SceneObject>();
         }
 
-        protected void AddEvent(SceneEvent sceneEvent)
+        protected void TriggerEvent(string eventName)
         {
-            EntityManager.AddComponentObject(Entity, sceneEvent);
+            EventManager.Trigger(SceneObject.ID, eventName);
         }
     }
 }

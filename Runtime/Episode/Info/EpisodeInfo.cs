@@ -10,6 +10,16 @@ namespace UnityAdventure
         public string Name;
 
         [HideInInspector] public SceneAssetsInfoRef Scenes;
+
+#if UNITY_EDITOR
+
+        [ContextMenu("Load All")]
+        void LoadAll()
+        {
+            Scenes.GetEditorAsset().LoadAll();
+        }
+
+#endif
     }
 
     [Serializable]

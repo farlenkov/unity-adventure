@@ -11,36 +11,21 @@ namespace UnityAdventure
         public const string EnterEventName = "OnTriggerEnter";
         public const string ExitEventName = "OnTriggerExit";
 
-        SceneEvent enterEvent;
-        SceneEvent exitEvent;
-
         protected override void Start()
         {
             base.Start();
-
-            enterEvent = new() 
-            { 
-                EventName = EnterEventName, 
-                ObjectID = SceneObject.ID
-            };
-
-            exitEvent = new() 
-            { 
-                EventName = ExitEventName,
-                ObjectID = SceneObject.ID
-            };
         }
 
         void OnTriggerEnter(Collider other)
         {
             if (IsValid(other.gameObject))
-                AddEvent(enterEvent);
+                TriggerEvent(EnterEventName);
         }
 
         void OnTriggerExit(Collider other)
         {
             if (IsValid(other.gameObject))
-                AddEvent(exitEvent);
+                TriggerEvent(ExitEventName);
         }
 
         bool IsValid(GameObject gameObject)

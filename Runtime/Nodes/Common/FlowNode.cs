@@ -12,8 +12,6 @@ namespace UnityAdventure
         //[HideInInspector]
         List<TriggerSource> triggerSources;
 
-        SceneEvent outEvent;
-
         public IReadOnlyList<TriggerSource> TriggerSources => triggerSources;
 
         public abstract void Execute();
@@ -21,12 +19,6 @@ namespace UnityAdventure
         protected override void Awake()
         {
             base.Awake();
-
-            outEvent = new()
-            {
-                EventName = OutEventName,
-                ObjectID = ID
-            };
 
             foreach (var triggerSource in triggerSources)
             {
@@ -50,10 +42,9 @@ namespace UnityAdventure
             base.OnDestroy();
         }
 
-        protected void TriggerOut()
+        protected void TriggerOutEvent()
         {
-            // TODO ...
-            SceneEventSystem.Handle(outEvent);
+            EventManager.Trigger(ID, OutEventName);
         }
 
         // STATIC

@@ -17,7 +17,7 @@ namespace UnityAdventure
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(Random.Range(Min, Max));
-            TriggerOut();
+            TriggerOutEvent();
         }
     }
 }

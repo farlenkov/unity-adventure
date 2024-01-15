@@ -12,7 +12,7 @@ namespace UnityAdventure
         {
             Toggle(Activate, true);
             Toggle(Deactivate, false);
-            TriggerOut();
+            TriggerOutEvent();
         }
 
         void Toggle(AdventureNodeRef[] nodeRefs, bool activate)
