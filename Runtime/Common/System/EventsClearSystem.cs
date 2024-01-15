@@ -9,6 +9,7 @@ namespace UnityAdventure
         {
             ClearSpawnEvents();
             ClearLookEvents();
+            ClearSceneEvents();
             ClearDestroyEvents();
         }
 
@@ -19,6 +20,17 @@ namespace UnityAdventure
                 .ForEach((Entity entity, SpawnEvent spawnEvent) =>
                 {
                     EntityManager.RemoveComponent<SpawnEvent>(entity);
+
+                }).Run();
+        }
+
+        void ClearSceneEvents()
+        {
+            Entities
+                .WithStructuralChanges()
+                .ForEach((Entity entity, SceneEvent sceneEvent) =>
+                {
+                    EntityManager.RemoveComponent<SceneEvent>(entity);
 
                 }).Run();
         }

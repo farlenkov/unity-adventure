@@ -2,7 +2,12 @@ namespace UnityAdventure
 {
     public class DoorToggleAction : FlowNode
     {
-        public SceneObjectRef[] Open;
-        public SceneObjectRef[] Close;
+        public AdventureNodeRef[] Open;
+        public AdventureNodeRef[] Close;
+
+        public override void Execute()
+        {
+
+        }
     }
 }

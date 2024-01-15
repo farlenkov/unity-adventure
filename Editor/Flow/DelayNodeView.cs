@@ -1,13 +1,13 @@
 namespace UnityAdventure
 {
-    public class LockToggleNodeView : FlowNodeView<LockToggleAction>
+    public class DelayNodeView : FlowNodeView<DelayAction>
     {
         protected override void OnInit()
         {
             base.OnInit();
             AddOutPort(FlowNode.OutEventName, "Out");
-            AddRefList("Open", Target.Open);
-            AddRefList("Close", Target.Close);
+            AddLabel($"Min: {Target.Min}");
+            AddLabel($"Max: {Target.Max}");
         }
     }
 }

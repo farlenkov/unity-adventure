@@ -8,7 +8,7 @@ namespace UnityAdventure
     {
         public static Entity SpawnObject<T>(
             this EntityManager entityManager,
-            T objectComponent) where T : MonoBehaviour, IComponentData
+            T objectComponent) where T : IComponentData
         {
             var entity = entityManager.CreateEntity();
             entityManager.AddComponentObject(entity, objectComponent);

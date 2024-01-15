@@ -9,6 +9,12 @@ namespace UnityAdventure
 
             var comps = Target.GetComponents<SceneComponent>();
 
+            if (comps.Length == 0)
+            {
+                AddLabel("[ Empty ]");
+                return;
+            }
+
             foreach (var comp in comps)
             {
                 switch (comp)
@@ -34,20 +40,20 @@ namespace UnityAdventure
 
         void AddComponent(SceneTrigger sceneTrigger)
         {
-            AddOutPort("OnEnterTrigger", "Trigger: OnEnter");
-            AddOutPort("OnExitTrigger", "Trigger: OnExit");
+            AddOutPort(SceneTrigger.EnterEventName, "Trigger: OnEnter");
+            AddOutPort(SceneTrigger.ExitEventName, "Trigger: OnExit");
         }
 
         void AddComponent(SceneDoor sceneDoor)
         {
-            AddOutPort("OnDoorOpen", "Door: OnOpen");
-            AddOutPort("OnDoorClose", "Door: OnClose");
+            AddOutPort(SceneDoor.OpenEventName, "Door: OnOpen");
+            AddOutPort(SceneDoor.CloseEventName, "Door: OnClose");
         }
 
         void AddComponent(SceneLock sceneLock)
         {
-            AddOutPort("OnLockOpen", "Lock: OnOpen");
-            AddOutPort("OnLockClose", "Lock: OnClose");
+            AddOutPort(SceneLock.OpenEventName, "Lock: OnOpen");
+            AddOutPort(SceneLock.CloseEventName, "Lock: OnClose");
         }
     }
 }

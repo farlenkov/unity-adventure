@@ -6,7 +6,7 @@ using UnityUtility;
 namespace UnityAdventure
 {
     [DisallowMultipleComponent]
-    public abstract class AdventureNode : MonoBehaviour
+    public abstract class AdventureNode : EntityBehaviour
     {
         [SerializeField]
         [ReadOnly]
@@ -15,15 +15,17 @@ namespace UnityAdventure
         public string ID => id;
         bool isAddedToIndex;
 
-        void Awake()
+        protected virtual void Awake()
         {
             isAddedToIndex = ByID.TryAdd(id, this);
         }
 
-        void OnDestroy()
+        protected override void OnDestroy()
         {
             if (isAddedToIndex)
                 ByID.Remove(id);
+
+            base.OnDestroy();
         }
 
         // STATIC
@@ -39,24 +41,24 @@ namespace UnityAdventure
 
 #else
 
-        public static bool TryGetByID(string id, out SceneObject sceneObject)
+        public static bool TryGetByID(string id, out AdventureNode adventureNode)
         {
-            var objectList = FindObjectsByType<SceneObject>(
+            var nodeList = FindObjectsByType<AdventureNode>(
                 FindObjectsInactive.Include,
                 FindObjectsSortMode.None);
 
-            for (var i = 0; i < objectList.Length; i++)
+            for (var i = 0; i < nodeList.Length; i++)
             {
-                var obj = objectList[i];
+                var obj = nodeList[i];
 
                 if (obj.ID == id)
                 {
-                    sceneObject = obj;
+                    adventureNode = obj;
                     return true;
                 }
             }
 
-            sceneObject = null;
+            adventureNode = null;
             return false;
         }
 

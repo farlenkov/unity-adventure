@@ -5,7 +5,7 @@ namespace UnityAdventure
         protected override void OnInit()
         {
             base.OnInit();
-            AddOutPort("Out", "Out");
+            AddOutPort(FlowNode.OutEventName, "Out");
             AddRefList("Open", Target.Open);
             AddRefList("Close", Target.Close);
         }

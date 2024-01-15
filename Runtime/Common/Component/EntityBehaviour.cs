@@ -6,18 +6,20 @@ namespace UnityAdventure
 {
     public abstract class EntityBehaviour : MonoBehaviour, IComponentData
     {
-        EntityManager entityManager;
-        Entity myEntity;
+        public EntityManager EntityManager { get; private set; }
+        public Entity Entity { get; private set; }
 
         protected virtual void Start()
         {
-            ServiceRegistry.GetService(out entityManager);
-            myEntity = entityManager.SpawnObject(this);
+            ServiceRegistry.GetService(out EntityManager entityManager);
+            EntityManager = entityManager;
+                        
+            Entity = entityManager.SpawnObject(this);
         }
 
         protected virtual void OnDestroy()
         {
-            entityManager.DestroyObject(myEntity);
+            EntityManager.DestroyObject(Entity);
         }
     }
 }

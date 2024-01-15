@@ -7,6 +7,7 @@ namespace UnityAdventure
     [DisallowMultipleComponent]
     public class SceneDoor : SceneComponent
     {
-        
+        public const string OpenEventName = "OnDoorOpen";
+        public const string CloseEventName = "OnDoorClose";
     }
 }

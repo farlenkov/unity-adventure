@@ -14,7 +14,8 @@ namespace UnityAdventure
         {
             { typeof(DoorToggleAction), typeof(DoorToggleNodeView) },
             { typeof(LockToggleAction), typeof(LockToggleNodeView) },
-            { typeof(ObjectToggleAction), typeof(ObjectToggleNodeView) }
+            { typeof(ObjectToggleAction), typeof(ObjectToggleNodeView) },
+            { typeof(DelayAction), typeof(DelayNodeView) }
         };
 
         protected override void OnEdgeCreate(Edge edge)

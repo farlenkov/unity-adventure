@@ -3,7 +3,7 @@ using System;
 namespace UnityAdventure
 {
     [Serializable]
-    public class SceneObjectRef
+    public class AdventureNodeRef
     {
         public string SceneName;
         public string ID;

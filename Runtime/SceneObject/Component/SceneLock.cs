@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityAdventure
@@ -7,6 +5,7 @@ namespace UnityAdventure
     [DisallowMultipleComponent]
     public class SceneLock : SceneComponent
     {
-        
+        public const string OpenEventName = "OnLockOpen";
+        public const string CloseEventName = "OnLockClose";
     }
 }

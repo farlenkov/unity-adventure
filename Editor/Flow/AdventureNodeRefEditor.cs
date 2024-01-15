@@ -5,8 +5,8 @@ using UnityUtility;
 
 namespace UnityAdventure
 {
-    [CustomPropertyDrawer(typeof(SceneObjectRef), true)]
-    public class SceneObjectRefEditor : PropertyDrawer
+    [CustomPropertyDrawer(typeof(AdventureNodeRef), true)]
+    public class AdventureNodeRefEditor : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -15,7 +15,7 @@ namespace UnityAdventure
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var prop = (SceneObjectRef)property.GetTargetObjectOfProperty();
+            var prop = (AdventureNodeRef)property.GetTargetObjectOfProperty();
             
             if (prop == null)
             {

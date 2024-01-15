@@ -9,7 +9,7 @@ namespace UnityAdventure
             AddInPort("In", "In");
         }
 
-        protected void AddRefList(string title, SceneObjectRef[] refList)
+        protected void AddRefList(string title, AdventureNodeRef[] refList)
         {
             if (refList.Length == 0)
                 return;
