@@ -8,16 +8,11 @@ namespace UnityAdventure
     {
         public EntityManager EntityManager { get; private set; }
         public Entity Entity { get; private set; }
-        public EventManager EventManager { get; private set; }
 
         protected virtual void Start()
         {
             ServiceRegistry.GetService(out EntityManager entityManager);
-            ServiceRegistry.GetService(out EventManager eventManager);
-
             EntityManager = entityManager;
-            EventManager = eventManager;
-                        
             Entity = entityManager.SpawnObject(this);
         }
 

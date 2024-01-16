@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace UnityAdventure
 {
@@ -6,5 +7,8 @@ namespace UnityAdventure
     {
         [NonSerialized]
         public PlayerLookTarget Target;
+
+        [NonSerialized]
+        public float TargetDistance;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityServiceRegistry;
 using UnityUtility;
 
 namespace UnityAdventure
@@ -15,9 +16,19 @@ namespace UnityAdventure
         public string ID => id;
         bool isAddedToIndex;
 
+        public EventManager EventManager { get; private set; }
+
         protected virtual void Awake()
         {
             isAddedToIndex = ByID.TryAdd(id, this);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            ServiceRegistry.GetService(out EventManager eventManager);
+            EventManager = eventManager;
         }
 
         protected override void OnDestroy()

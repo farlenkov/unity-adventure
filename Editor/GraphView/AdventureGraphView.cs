@@ -37,7 +37,15 @@ namespace UnityAdventure
 
         protected override void OnEdgeRemove(Edge edge)
         {
+            var fromNodeView = edge.output.node as AdventureNodeView;
+            var toNodeView = edge.input.node as AdventureNodeView;
+            var flowNode = toNodeView.GetType().GetField(nameof(FlowNodeView<FlowNode>.Target)).GetValue(toNodeView) as FlowNode;
 
+            flowNode.TryRemoveTriggerSource(
+                fromNodeView.viewDataKey,
+                edge.output.userData.ToString());
+
+            EditorUtility.SetDirty(flowNode);
         }
 
         protected override void OnGraphDestroy()

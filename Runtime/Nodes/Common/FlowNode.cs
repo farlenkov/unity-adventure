@@ -111,6 +111,23 @@ namespace UnityAdventure
             return true;
         }
 
+        public void TryRemoveTriggerSource(
+            string objectID,
+            string triggerName)
+        {
+            for (var i = 0; i < triggerSources.Count; i++)
+            {
+                var item = triggerSources[i];
+
+                if (item.ObjectID == objectID &&
+                    item.TriggerName == triggerName)
+                {
+                    triggerSources.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
 #endif
     }
 }

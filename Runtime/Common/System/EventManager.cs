@@ -14,7 +14,7 @@ namespace UnityAdventure
 
             foreach (var flowNode in flowNodes)
             {
-                Log.Info($"[SceneTriggerSystem: Trigger] {eventName} > {flowNode.gameObject.name}");
+                //Log.Info($"[SceneTriggerSystem: Trigger] {eventName} > {flowNode.gameObject.name}");
                 flowNode.Execute();
             }
         }

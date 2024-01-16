@@ -28,7 +28,7 @@ namespace UnityAdventure
                     continue;
 
                 node.gameObject.SetActive(activate);
-                Log.Info($"[ObjectToggleAction] {node.gameObject.name} > {activate}");
+                //Log.Info($"[ObjectToggleAction] {node.gameObject.name} > {activate}");
             }
         }
     }

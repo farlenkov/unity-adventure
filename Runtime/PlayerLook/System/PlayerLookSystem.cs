@@ -7,7 +7,7 @@ namespace UnityAdventure
 {
     public partial class PlayerLookSystem : GameLoopSystem<GameLoop>
     {
-        PlayerLookConfig lookConfig;
+        PlayerLookConfig config;
         PlayerLookEvent reusableLookEvent = new PlayerLookEvent();
         RaycastHit[] hits = new RaycastHit[10];
         float nextUpdateTime;
@@ -17,7 +17,7 @@ namespace UnityAdventure
         protected override void OnInit()
         {
             base.OnInit();
-            lookConfig = PlayerLookConfig.Load();
+            config = PlayerLookConfig.Load();
         }
 
         protected override void OnUpdate()
@@ -36,7 +36,7 @@ namespace UnityAdventure
 
         void Cast(Entity entity, PlayerLookSource lookSource)
         {
-            nextUpdateTime = ElapsedTime + lookConfig.UpdateInterval;
+            nextUpdateTime = ElapsedTime + config.UpdateInterval;
 
             var lookTransform = lookSource.transform;
 
@@ -44,8 +44,8 @@ namespace UnityAdventure
                 lookTransform.position,
                 lookTransform.forward,
                 hits,
-                lookConfig.MaxDistance,
-                lookConfig.CastMask);
+                config.MaxDistance,
+                config.CastMask);
 
             if (hitsCount == 0)
             {
@@ -60,7 +60,7 @@ namespace UnityAdventure
                 var hit = hits[i];
                 var gameObject = hit.collider.gameObject;
 
-                if (!gameObject.InLayers(lookConfig.TargetMask))
+                if (!gameObject.InLayers(config.TargetMask))
                 {
                     Miss(entity, lookSource);
                     break;
@@ -75,22 +75,29 @@ namespace UnityAdventure
                 }
 
                 if (newTarget != lookSource.Target)
-                    Hit(entity, lookSource, newTarget);
+                    Hit(entity, lookSource, newTarget, hit);
 
                 break;
             }
         }
 
-        void Hit(Entity entity, PlayerLookSource lookSource, PlayerLookTarget newTarget)
+        void Hit(
+            Entity entity, 
+            PlayerLookSource lookSource, 
+            PlayerLookTarget newTarget, 
+            RaycastHit hit)
         {
             reusableLookEvent.NewTarget = newTarget;
             reusableLookEvent.OldTarget = lookSource.Target;
             EntityManager.AddComponentData(entity, reusableLookEvent);
 
             lookSource.Target = newTarget;
+            lookSource.TargetDistance = hit.distance;
         }
 
-        void Miss(Entity entity, PlayerLookSource lookSource)
+        void Miss(
+            Entity entity, 
+            PlayerLookSource lookSource)
         {
             if (lookSource.Target != null)
             {
