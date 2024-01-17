@@ -11,6 +11,9 @@ namespace UnityAdventure
 
         protected void AddRefList(string title, AdventureNodeRef[] refList)
         {
+            if (refList == null)
+                return;
+
             if (refList.Length == 0)
                 return;
 

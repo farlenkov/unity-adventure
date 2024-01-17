@@ -1,3 +1,5 @@
+using System;
+
 namespace UnityAdventure
 {
     public class SceneObjectNodeView : AdventureNodeView<SceneObject>
@@ -31,11 +33,31 @@ namespace UnityAdventure
                         AddComponent(sceneLock);
                         break;
 
+                    case InteractableObject interactableObject:
+                        AddComponent(interactableObject);
+                        break;
+
+                    case SceneSwitch sceneSwitch:
+                        AddComponent(sceneSwitch);
+                        break;
+
                     default:
                         AddLabel(comp.GetType().Name);
                         break;
                 }
             }
+        }
+
+        void AddComponent(SceneSwitch sceneSwitch)
+        {
+            AddOutPort(SceneSwitch.ActivateEventName, "Switch: OnActivate");
+            AddOutPort(SceneSwitch.DeactivateEventName, "Switch: OnDeactivate");
+
+        }
+
+        void AddComponent(InteractableObject interactableObject)
+        {
+            AddOutPort(InteractableObject.InteractEventName, InteractableObject.InteractEventName);
         }
 
         void AddComponent(SceneTrigger sceneTrigger)

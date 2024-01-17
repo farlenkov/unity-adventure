@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityGameLoop;
-using UnityUtility;
 
 namespace UnityAdventure
 {
@@ -17,6 +13,7 @@ namespace UnityAdventure
         protected override void OnInit()
         {
             base.OnInit();
+
             config = DraggableConfig.Load();
             grabAction = config.GrabInputAction.action;
         }
@@ -54,9 +51,16 @@ namespace UnityAdventure
                 .WithoutBurst()
                 .ForEach((PlayerLookSource lookSource) =>
                 {
-                    if (lookSource.Target != null)
-                        if (lookSource.Target.TryGetComponent<DraggableObject>(out var draggableObject))
-                            Grab(lookSource.TargetDistance, draggableHandle, draggableObject);
+                    if (lookSource.Target == null)
+                        return;
+
+                    if (lookSource.TargetDistance > config.GrabDistance)
+                        return;
+
+                    if (!lookSource.Target.TryGetComponent(out DraggableObject draggableObject))
+                        return;
+                                
+                    Grab(lookSource.TargetDistance, draggableHandle, draggableObject);
 
                 }).Run();
         }

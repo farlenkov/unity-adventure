@@ -57,7 +57,13 @@ namespace UnityAdventure
 
         internal override void CreateEdges()
         {
+            if (Target == null)
+                return;
+
             if (Target is not FlowNode flowNode)
+                return;
+
+            if (flowNode.TriggerSources == null)
                 return;
 
             var inPort = Ports["In"];
@@ -66,7 +72,7 @@ namespace UnityAdventure
             {
                 if (!Graph.TryGetNode(triggerSource.ObjectID, out var node))
                 {
-                    Log.Error($"[AdventureNodeView: CreateEdges] Node not found: {triggerSource.SceneName} > {triggerSource.ObjectName} ID: {triggerSource.ObjectID}");
+                    Log.Error($"[AdventureNodeView: CreateEdges] Node not found: {triggerSource.SceneName} > {triggerSource.ObjectName} ID: {triggerSource.ObjectID} (for '{flowNode.gameObject.name}' in '{flowNode.gameObject.GetRootName()}')");
                     continue;
                 }
 

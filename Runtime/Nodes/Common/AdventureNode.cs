@@ -43,6 +43,13 @@ namespace UnityAdventure
 
         static Dictionary<string, AdventureNode> ByID = new();
 
+        public static T[] FindAllNodes<T>() where T : AdventureNode
+        {
+            return FindObjectsByType<T>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None);
+        }
+
 #if !UNITY_EDITOR
 
         public static bool TryGetByID(string id, out SceneObject sceneObject)
@@ -54,9 +61,7 @@ namespace UnityAdventure
 
         public static bool TryGetByID(string id, out AdventureNode adventureNode)
         {
-            var nodeList = FindObjectsByType<AdventureNode>(
-                FindObjectsInactive.Include,
-                FindObjectsSortMode.None);
+            var nodeList = FindAllNodes<AdventureNode>();
 
             for (var i = 0; i < nodeList.Length; i++)
             {
@@ -75,15 +80,42 @@ namespace UnityAdventure
 
         void OnValidate()
         {
+            // NEW ID FOR NEW OBJECT
+
             if (string.IsNullOrEmpty(id))
-                id = Guid.NewGuid().ToString();
+            {
+                CreateNewID();
+                return;
+            }
+
+            // NEW ID FOR DUPLICATE
+
+            var nodeList = FindAllNodes<AdventureNode>();
+
+            for (var i = 0; i < nodeList.Length; i++)
+            {
+                var obj = nodeList[i];
+
+                if (obj.ID == id &&
+                    obj != this)
+                {
+                    CreateNewID();
+                    return;
+                }
+            }
         }
 
         [ContextMenu("Refresh ID")]
         void RefreshID()
         {
-            id = Guid.NewGuid().ToString();
+            CreateNewID();
             UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        void CreateNewID()
+        {
+            id = Guid.NewGuid().ToString();
+            Log.Info($"[AdventureNode: CreateNewID] '{gameObject.name}' = {id}");
         }
 
 #endif

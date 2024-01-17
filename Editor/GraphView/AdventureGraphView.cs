@@ -17,7 +17,8 @@ namespace UnityAdventure
             { typeof(ObjectToggleAction), typeof(ObjectToggleNodeView) },
             { typeof(DelayAction), typeof(DelayNodeView) },
             { typeof(StartAction), typeof(StartNodeView) },
-            { typeof(RepeatAction), typeof(RepeatNodeView) }
+            { typeof(RepeatAction), typeof(RepeatNodeView) },
+            { typeof(LightToggleAction), typeof(LightToggleNodeView) }
         };
 
         protected override void OnEdgeCreate(Edge edge)
@@ -71,7 +72,7 @@ namespace UnityAdventure
 
         void CreateSceneNodes()
         {
-            var sceneObjects = GameObject.FindObjectsOfType<SceneObject>();
+            var sceneObjects = AdventureNode.FindAllNodes<SceneObject>();
 
             foreach (var sceneObject in sceneObjects)
             {
@@ -89,7 +90,7 @@ namespace UnityAdventure
 
         void CreateFlowNodes()
         {
-            var flowObjects = GameObject.FindObjectsOfType<FlowNode>();
+            var flowObjects = AdventureNode.FindAllNodes<FlowNode>();
 
             foreach (var flowObject in flowObjects)
             {

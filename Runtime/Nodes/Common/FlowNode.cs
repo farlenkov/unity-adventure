@@ -93,6 +93,9 @@ namespace UnityAdventure
             string triggerName,
             string sceneName)
         {
+            if (triggerSources == null)
+                triggerSources = new List<TriggerSource>();
+
             foreach (var item in triggerSources)
             {
                 if (item.ObjectID == objectID &&
