@@ -21,6 +21,12 @@ namespace UnityAdventure
             { typeof(LightToggleAction), typeof(LightToggleNodeView) }
         };
 
+        public AdventureGraphView() : base() 
+        {
+            EditorApplication.hierarchyChanged += Refresh;
+            Refresh();
+        }
+
         protected override void OnEdgeCreate(Edge edge)
         {
             var fromNodeView = edge.output.node as AdventureNodeView;
@@ -51,7 +57,7 @@ namespace UnityAdventure
 
         protected override void OnGraphDestroy()
         {
-
+            EditorApplication.hierarchyChanged -= Refresh;
         }
 
         protected override void AddStyle()

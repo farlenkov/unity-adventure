@@ -9,13 +9,7 @@ namespace UnityAdventure
         public void CreateGUI()
         {
             graphView = new AdventureGraphView();
-            rootVisualElement.Add(graphView); 
-            OnHierarchyChange();
-        }
-
-        void OnHierarchyChange()
-        {
-            graphView.Refresh();
+            rootVisualElement.Add(graphView);
         }
 
         // STATIC

@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace UnityAdventure
 {
-    [CreateAssetMenu(menuName = "Adventure/PlayerLookConfig")]
-    public class PlayerLookConfig : ScriptableObject
+    [CreateAssetMenu(menuName = "Adventure/PlayerLookConfig", fileName = "PlayerLookConfig")]
+    public class PlayerLookConfig : BaseConfig
     {
         public LayerMask CastMask;
         public LayerMask TargetMask;
@@ -12,13 +12,6 @@ namespace UnityAdventure
 
         // STATIC
 
-        public static PlayerLookConfig Load()
-        {
-            var configs = Resources.LoadAll<PlayerLookConfig>("");
-
-            return configs.Length > 0
-                ? configs[0] 
-                : null;
-        }
+        public static PlayerLookConfig Load() => Load<PlayerLookConfig>();
     }
 }

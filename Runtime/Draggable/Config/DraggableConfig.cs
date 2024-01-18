@@ -4,8 +4,8 @@ using UnityUtility;
 
 namespace UnityAdventure
 {
-    [CreateAssetMenu(menuName = "Adventure/DraggableConfig")]
-    public class DraggableConfig : ScriptableObject
+    [CreateAssetMenu(menuName = "Adventure/DraggableConfig", fileName = "DraggableConfig")]
+    public class DraggableConfig : BaseConfig
     {
         [field: SerializeField]
         public InputActionReference GrabInputAction { get; private set; }
@@ -24,18 +24,7 @@ namespace UnityAdventure
 
         // STATIC
 
-        public static DraggableConfig Load()
-        {
-            var configs = Resources.LoadAll<DraggableConfig>("");
-
-            if (configs.Length == 0)
-                return null;
-
-            if (configs.Length > 1)
-                Log.WarningEditor("[DraggableConfig: Load] More than one config found");
-
-            return configs[0];
-        }
+        public static DraggableConfig Load() => Load<DraggableConfig>();
 
 #if UNITY_EDITOR
 

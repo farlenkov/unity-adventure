@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityAdventure
 {
-    [CreateAssetMenu(menuName = "Adventure/SceneTriggerPreset")]
+    [CreateAssetMenu(menuName = "Adventure/SceneTriggerPreset", fileName = "SceneTriggerPreset")]
     public class SceneTriggerPreset : ScriptableObject
     {
         public LayerMask IncludeLayers;
