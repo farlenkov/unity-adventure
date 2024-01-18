@@ -1,11 +1,11 @@
+using UnityConfig;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityUtility;
 
 namespace UnityAdventure
 {
     [CreateAssetMenu(menuName = "Adventure/DraggableConfig", fileName = "DraggableConfig")]
-    public class DraggableConfig : BaseConfig
+    public class DraggableConfig : SingleConfig<DraggableConfig>
     {
         [field: SerializeField]
         public InputActionReference GrabInputAction { get; private set; }
@@ -21,10 +21,6 @@ namespace UnityAdventure
         float breakDistanceSqt;
 
         public float BreakDistanceSqt => breakDistanceSqt;
-
-        // STATIC
-
-        public static DraggableConfig Load() => Load<DraggableConfig>();
 
 #if UNITY_EDITOR
 
