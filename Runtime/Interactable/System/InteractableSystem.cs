@@ -17,6 +17,7 @@ namespace UnityAdventure
 
             config = InteractableConfig.Load();
             interactAction = config.InteractInputAction.action;
+            interactAction.Enable();
         }
 
         protected override void OnUpdate()
