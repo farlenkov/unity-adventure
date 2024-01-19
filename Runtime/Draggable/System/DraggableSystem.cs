@@ -2,6 +2,7 @@ using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityGameLoop;
+using UnityUtility;
 
 namespace UnityAdventure
 {
@@ -16,6 +17,7 @@ namespace UnityAdventure
 
             config = DraggableConfig.Load();
             grabAction = config.GrabInputAction.action;
+            grabAction.Enable();
         }
 
         protected override void OnUpdate()

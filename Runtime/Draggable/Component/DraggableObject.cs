@@ -5,7 +5,6 @@ using UnityEngine;
 namespace UnityAdventure
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent (typeof(PlayerLookTarget))]
     public class DraggableObject : MonoBehaviour
     {
