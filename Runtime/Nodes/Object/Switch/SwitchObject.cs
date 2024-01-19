@@ -6,13 +6,14 @@ using UnityUtility;
 
 namespace UnityAdventure
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(InteractableObject))]
-    public class SceneSwitch : SceneComponent
+    public class SwitchObject : SceneComponent
     {
         [field: SerializeField]
         public bool IsActive { get; private set; }
 
-        public event Action<SceneSwitch, bool> OnSwitch;
+        public event Action<SwitchObject, bool> OnSwitch;
 
         public const string ActivateEventName = "OnSwitchActivate";
         public const string DeactivateEventName = "OnSwitchDeactivate";

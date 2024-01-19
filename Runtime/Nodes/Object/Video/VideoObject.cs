@@ -5,18 +5,18 @@ using UnityEngine.Video;
 
 namespace UnityAdventure
 {
-    public class SceneVideo : SceneSwitchable
+    public class VideoObject : SwitchableObject
     {
         [field: SerializeField]
         public VideoPlayer Player { get; private set; }
 
         [field: SerializeField]
-        public SceneVideoSaveTime SaveTimeOnSwitch { get; private set; }
+        public VideoObjectSaveTime SaveTimeOnSwitch { get; private set; }
 
         double savedTime;
         float turnOffTime = -1;
 
-        protected override void OnSwitch(SceneSwitch sceneSwitch, bool isActive)
+        protected override void OnSwitch(SwitchObject sceneSwitch, bool isActive)
         {
             if (Player == null)
                 return;
@@ -27,11 +27,11 @@ namespace UnityAdventure
 
                 switch (SaveTimeOnSwitch)
                 {
-                    case SceneVideoSaveTime.Freeze:
+                    case VideoObjectSaveTime.Freeze:
                         Player.time = savedTime;
                         break;
 
-                    case SceneVideoSaveTime.Continue:
+                    case VideoObjectSaveTime.Continue:
                         Player.time = savedTime + (turnOffTime < 0 ? 0 : Time.time - turnOffTime);
                         break;
                 }
@@ -43,5 +43,15 @@ namespace UnityAdventure
                 Player.Stop();
             }
         }
+
+#if UNITY_EDITOR
+
+        void OnValidate()
+        {
+            if (Player == null)
+                Player = GetComponent<VideoPlayer>();
+        }
+
+#endif
     }
 }

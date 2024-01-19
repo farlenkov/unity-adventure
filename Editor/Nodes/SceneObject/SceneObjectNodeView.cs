@@ -21,24 +21,24 @@ namespace UnityAdventure
             {
                 switch (comp)
                 {
-                    case SceneTrigger sceneTrigger:
-                        AddComponent(sceneTrigger);
+                    case TriggerObject triggerObject:
+                        AddComponent(triggerObject);
                         break;
 
-                    case SceneDoor sceneDoor:
-                        AddComponent(sceneDoor);
+                    case DoorObject doorObject:
+                        AddComponent(doorObject);
                         break;
 
-                    case SceneLock sceneLock:
-                        AddComponent(sceneLock);
+                    case LockObject lockObject:
+                        AddComponent(lockObject);
                         break;
 
                     case InteractableObject interactableObject:
                         AddComponent(interactableObject);
                         break;
 
-                    case SceneSwitch sceneSwitch:
-                        AddComponent(sceneSwitch);
+                    case SwitchObject switchObject:
+                        AddComponent(switchObject);
                         break;
 
                     default:
@@ -48,11 +48,10 @@ namespace UnityAdventure
             }
         }
 
-        void AddComponent(SceneSwitch sceneSwitch)
+        void AddComponent(SwitchObject switchObject)
         {
-            AddOutPort(SceneSwitch.ActivateEventName, "Switch: OnActivate");
-            AddOutPort(SceneSwitch.DeactivateEventName, "Switch: OnDeactivate");
-
+            AddOutPort(SwitchObject.ActivateEventName, "Switch: OnActivate");
+            AddOutPort(SwitchObject.DeactivateEventName, "Switch: OnDeactivate");
         }
 
         void AddComponent(InteractableObject interactableObject)
@@ -60,22 +59,22 @@ namespace UnityAdventure
             AddOutPort(InteractableObject.InteractEventName, InteractableObject.InteractEventName);
         }
 
-        void AddComponent(SceneTrigger sceneTrigger)
+        void AddComponent(TriggerObject triggerObject)
         {
-            AddOutPort(SceneTrigger.EnterEventName, "Trigger: OnEnter");
-            AddOutPort(SceneTrigger.ExitEventName, "Trigger: OnExit");
+            AddOutPort(TriggerObject.EnterEventName, "Trigger: OnEnter");
+            AddOutPort(TriggerObject.ExitEventName, "Trigger: OnExit");
         }
 
-        void AddComponent(SceneDoor sceneDoor)
+        void AddComponent(DoorObject doorObject)
         {
-            AddOutPort(SceneDoor.OpenEventName, "Door: OnOpen");
-            AddOutPort(SceneDoor.CloseEventName, "Door: OnClose");
+            AddOutPort(DoorObject.OpenEventName, "Door: OnOpen");
+            AddOutPort(DoorObject.CloseEventName, "Door: OnClose");
         }
 
-        void AddComponent(SceneLock sceneLock)
+        void AddComponent(LockObject lockObject)
         {
-            AddOutPort(SceneLock.OpenEventName, "Lock: OnOpen");
-            AddOutPort(SceneLock.CloseEventName, "Lock: OnClose");
+            AddOutPort(LockObject.OpenEventName, "Lock: OnOpen");
+            AddOutPort(LockObject.CloseEventName, "Lock: OnClose");
         }
     }
 }

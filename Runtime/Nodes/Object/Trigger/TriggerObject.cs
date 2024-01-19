@@ -4,9 +4,9 @@ using UnityUtility;
 namespace UnityAdventure
 {
     [DisallowMultipleComponent]
-    public class SceneTrigger : SceneComponent
+    public class TriggerObject : SceneComponent
     {
-        public SceneTriggerPreset Preset;
+        public TriggerObjectPreset Preset;
 
         public const string EnterEventName = "OnTriggerEnter";
         public const string ExitEventName = "OnTriggerExit";

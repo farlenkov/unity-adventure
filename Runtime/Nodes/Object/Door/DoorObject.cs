@@ -5,7 +5,7 @@ using UnityEngine;
 namespace UnityAdventure
 {
     [DisallowMultipleComponent]
-    public class SceneDoor : SceneComponent
+    public class DoorObject : SceneComponent
     {
         public const string OpenEventName = "OnDoorOpen";
         public const string CloseEventName = "OnDoorClose";

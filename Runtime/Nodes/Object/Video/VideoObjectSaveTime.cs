@@ -1,6 +1,6 @@
 namespace UnityAdventure
 {
-    public enum SceneVideoSaveTime
+    public enum VideoObjectSaveTime
     {
         None,
         Freeze,

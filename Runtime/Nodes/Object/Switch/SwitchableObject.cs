@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace UnityAdventure
 {
-    public abstract class SceneSwitchable : SceneComponent
+    public abstract class SwitchableObject : SceneComponent
     {
         [field: SerializeField]
-        public SceneSwitch Switch { get; private set; }
+        public SwitchObject Switch { get; private set; }
 
-        protected abstract void OnSwitch(SceneSwitch sceneSwitch, bool isActive);
+        protected abstract void OnSwitch(SwitchObject sceneSwitch, bool isActive);
 
         protected override void Start()
         {

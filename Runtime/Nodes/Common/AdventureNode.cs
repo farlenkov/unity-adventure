@@ -116,7 +116,7 @@ namespace UnityAdventure
         void CreateNewID()
         {
             id = Guid.NewGuid().ToString();
-            Log.Info($"[AdventureNode: CreateNewID] '{gameObject.name}' = {id}");
+            Log.Info($"[AdventureNode: CreateNewID] '{gameObject.name}' = {id} ({gameObject.GetRootName()})");
         }
 
 #endif
