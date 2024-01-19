@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace UnityAdventure
         [field: SerializeField]
         public bool IsActive { get; private set; }
 
+        public event Action<SceneSwitch, bool> OnSwitch;
+
         public const string ActivateEventName = "OnSwitchActivate";
         public const string DeactivateEventName = "OnSwitchDeactivate";
 
@@ -23,6 +26,8 @@ namespace UnityAdventure
         void OnInteract()
         {
             IsActive = !IsActive;
+            OnSwitch?.Invoke(this, IsActive);
+
             var eventName = IsActive ? ActivateEventName : DeactivateEventName;
 
             Log.Info($"[SceneSwitch: OnInteract] '{gameObject.name}' > {eventName}");
