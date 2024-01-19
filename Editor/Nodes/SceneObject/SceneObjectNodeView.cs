@@ -37,7 +37,7 @@ namespace UnityAdventure
                         AddComponent(interactableObject);
                         break;
 
-                    case SwitchObject switchObject:
+                    case InteractableSwitchObject switchObject:
                         AddComponent(switchObject);
                         break;
 
@@ -48,10 +48,10 @@ namespace UnityAdventure
             }
         }
 
-        void AddComponent(SwitchObject switchObject)
+        void AddComponent(InteractableSwitchObject switchObject)
         {
-            AddOutPort(SwitchObject.ActivateEventName, "Switch: OnActivate");
-            AddOutPort(SwitchObject.DeactivateEventName, "Switch: OnDeactivate");
+            AddOutPort(InteractableSwitchObject.ActivateEventName, "Switch: OnActivate");
+            AddOutPort(InteractableSwitchObject.DeactivateEventName, "Switch: OnDeactivate");
         }
 
         void AddComponent(InteractableObject interactableObject)

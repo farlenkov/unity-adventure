@@ -4,8 +4,10 @@ using UnityUtility;
 namespace UnityAdventure
 {
     [DisallowMultipleComponent]
-    public class TriggerObject : SceneComponent
+    public class TriggerObject : SwitchObject
     {
+        int enterCounter;
+
         public TriggerObjectPreset Preset;
 
         public const string EnterEventName = "OnTriggerEnter";
@@ -14,18 +16,27 @@ namespace UnityAdventure
         protected override void Start()
         {
             base.Start();
+            SetIsActive(false);
         }
 
         void OnTriggerEnter(Collider other)
         {
             if (IsValid(other.gameObject))
+            {
+                enterCounter++;
+                SetIsActive(enterCounter > 0);
                 TriggerEvent(EnterEventName);
+            }
         }
 
         void OnTriggerExit(Collider other)
         {
             if (IsValid(other.gameObject))
+            {
+                enterCounter--;
+                SetIsActive(enterCounter > 0);
                 TriggerEvent(ExitEventName);
+            }
         }
 
         bool IsValid(GameObject gameObject)

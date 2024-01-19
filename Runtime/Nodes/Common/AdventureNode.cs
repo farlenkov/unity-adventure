@@ -81,6 +81,9 @@ namespace UnityAdventure
 
         void OnValidate()
         {
+            if (string.IsNullOrEmpty(gameObject.scene.path))
+                return;
+            
             // NEW ID FOR NEW OBJECT
 
             if (string.IsNullOrEmpty(id))
@@ -110,6 +113,13 @@ namespace UnityAdventure
         void RefreshID()
         {
             CreateNewID();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [ContextMenu("Clear ID")]
+        void ClearID()
+        {
+            id = null;
             UnityEditor.EditorUtility.SetDirty(this);
         }
 

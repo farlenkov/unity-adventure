@@ -4,12 +4,12 @@ using UnityServiceRegistry;
 
 namespace UnityAdventure
 {
-    [RequireComponent(typeof(SceneObject))]
+    //[RequireComponent(typeof(SceneObject))]
     public abstract class SceneComponent : MonoBehaviour, IComponentData
     {        
-        protected EntityManager EntityManager => SceneObject.EntityManager;
-        protected Entity Entity => SceneObject.Entity;
-        protected EventManager EventManager => SceneObject.EventManager;
+        protected EntityManager EntityManager => (EntityManager)(SceneObject?.EntityManager);
+        protected Entity Entity => (Entity)(SceneObject?.Entity);
+        protected EventManager EventManager => SceneObject?.EventManager;
         protected SceneObject SceneObject { get; private set; }
 
         protected virtual void Start()
@@ -19,7 +19,7 @@ namespace UnityAdventure
 
         protected void TriggerEvent(string eventName)
         {
-            EventManager.Trigger(SceneObject.ID, eventName);
+            EventManager?.Trigger(SceneObject.ID, eventName);
         }
     }
 }

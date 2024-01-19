@@ -9,7 +9,16 @@ namespace UnityAdventure
         [field: SerializeField]
         public Light Light { get; private set; }
 
-        protected override void OnSwitch(SwitchObject sceneSwitch, bool isActive)
+        protected override void Start()
+        {
+            base.Start();
+
+            if (Switch != null &&
+                Light != null)
+                Light.enabled = Switch.IsActive;
+        }
+
+        protected override void OnSwitch(SwitchObject switchObject, bool isActive)
         {
             if (Light != null)
                 Light.enabled = isActive;

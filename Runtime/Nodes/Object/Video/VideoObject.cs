@@ -16,7 +16,7 @@ namespace UnityAdventure
         double savedTime;
         float turnOffTime = -1;
 
-        protected override void OnSwitch(SwitchObject sceneSwitch, bool isActive)
+        protected override void OnSwitch(SwitchObject switchObject, bool isActive)
         {
             if (Player == null)
                 return;
