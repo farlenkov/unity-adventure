@@ -7,7 +7,9 @@
         "UnityUtility.Runtime",
         "UnityGraph.Editor",
         "UnityAdventure.Runtime",
-        "UnityGameLoop.Runtime"
+        "UnityGameLoop.Runtime",
+        "UnityObjectInfo.Editor",
+        "UnityObjectInfo.Runtime"
     ],
     "includePlatforms": [
         "Editor"

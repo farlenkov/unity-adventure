@@ -14,7 +14,7 @@ namespace UnityAdventure
 
         // STATIC
 
-        [MenuItem("Window/Adventure Graph")]
+        [MenuItem("Window/Adventure/Graph")]
         public static void Init()
         {
             GetWindow<AdventureGraphWindow>("Adventure Graph");

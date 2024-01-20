@@ -8,7 +8,7 @@ namespace UnityAdventure
     public class VideoObject : SwitchableObject
     {
         [field: SerializeField]
-        public VideoPlayer Player { get; private set; }
+        public VideoPlayer VideoPlayer { get; private set; }
 
         [field: SerializeField]
         public VideoObjectSaveTime SaveTimeOnSwitch { get; private set; }
@@ -18,29 +18,29 @@ namespace UnityAdventure
 
         protected override void OnSwitch(SwitchObject switchObject, bool isActive)
         {
-            if (Player == null)
+            if (VideoPlayer == null)
                 return;
 
             if (isActive)
             {
-                Player.Play();
+                VideoPlayer.Play();
 
                 switch (SaveTimeOnSwitch)
                 {
                     case VideoObjectSaveTime.Freeze:
-                        Player.time = savedTime;
+                        VideoPlayer.time = savedTime;
                         break;
 
                     case VideoObjectSaveTime.Continue:
-                        Player.time = savedTime + (turnOffTime < 0 ? 0 : Time.time - turnOffTime);
+                        VideoPlayer.time = savedTime + (turnOffTime < 0 ? 0 : Time.time - turnOffTime);
                         break;
                 }
             }
             else
             {
-                savedTime = Player.time;
+                savedTime = VideoPlayer.time;
                 turnOffTime = Time.time;
-                Player.Stop();
+                VideoPlayer.Stop();
             }
         }
 
@@ -48,8 +48,8 @@ namespace UnityAdventure
 
         void OnValidate()
         {
-            if (Player == null)
-                Player = GetComponent<VideoPlayer>();
+            if (VideoPlayer == null)
+                VideoPlayer = GetComponent<VideoPlayer>();
         }
 
 #endif
