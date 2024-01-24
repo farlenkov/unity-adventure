@@ -2,7 +2,7 @@ using System;
 
 namespace UnityAdventure
 {
-    public class SceneObjectNodeView : AdventureNodeView<SceneObject>
+    public class SceneObjectNodeView : SceneNodeView<SceneObject>
     {
         protected override void OnInit()
         {

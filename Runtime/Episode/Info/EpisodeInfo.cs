@@ -9,6 +9,7 @@ namespace UnityAdventure
     {
         public string Name;
 
+        [HideInInspector] public Vector2 Position;
         [HideInInspector] public SceneAssetsInfoRef Scenes;
 
 #if UNITY_EDITOR

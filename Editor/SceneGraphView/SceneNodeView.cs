@@ -6,7 +6,7 @@ using UnityUtility;
 
 namespace UnityAdventure
 {
-    public abstract class AdventureNodeView : UnityGraphEditor.NodeView
+    public abstract class SceneNodeView : UnityGraphEditor.NodeView
     {
         public NodeViewData Data;
         public AdventureGraphView Graph;
@@ -28,16 +28,16 @@ namespace UnityAdventure
 
         protected Port AddInPort(string userData, string name)
         {
-            return AddInPort<AdventureNodeView>(userData, name);
+            return AddInPort<SceneNodeView>(userData, name);
         }
 
         protected Port AddOutPort(string userData, string name)
         {
-            return AddOutPort<AdventureNodeView>(userData, name);
+            return AddOutPort<SceneNodeView>(userData, name);
         }
     }
 
-    public abstract class AdventureNodeView<T> : AdventureNodeView
+    public abstract class SceneNodeView<T> : SceneNodeView
         where T : AdventureNode
     {
         public T Target;

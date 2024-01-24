@@ -1,6 +1,6 @@
 namespace UnityAdventure
 {
-    public abstract class FlowNodeView<T> : AdventureNodeView<T> where T : FlowNode
+    public abstract class FlowNodeView<T> : SceneNodeView<T> where T : FlowNode
     {
         protected override void OnInit()
         {

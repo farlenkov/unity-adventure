@@ -4,20 +4,20 @@ namespace UnityAdventure
 {
     public class AdventureGraphWindow : UnityGraphEditor.GraphWindow
     {
-        AdventureGraphView graphView;
+        SceneGraphView graphView;
 
         public void CreateGUI()
         {
-            graphView = new AdventureGraphView();
+            graphView = new SceneGraphView();
             rootVisualElement.Add(graphView);
         }
 
         // STATIC
 
-        [MenuItem("Window/Adventure/Graph")]
+        [MenuItem("Window/Adventure/Scene Graph")]
         public static void Init()
         {
-            GetWindow<AdventureGraphWindow>("Adventure Graph");
+            GetWindow<AdventureGraphWindow>("Scene Graph");
         }
     }
 }
